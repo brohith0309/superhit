@@ -9,7 +9,9 @@
     <!-- Premium Fonts & Icons -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500;600;700;800&family=Cormorant+Garamond:ital,wght@0,300..700;1,300..700&family=Poppins:wght@300;400;500;600;700&family=Pinyon+Script&display=swap" rel="stylesheet">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500;600;700;800&family=Cormorant+Garamond:ital,wght@0,300..700;1,300..700&family=Poppins:wght@300;400;500;600;700&family=Pinyon+Script&display=swap"
+        rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 
     <!-- Tailwind CSS -->
@@ -124,7 +126,7 @@
 <body class="font-sansBody text-charcoal relative overflow-x-hidden pb-24 md:pb-8">
 
     <!-- GLOBAL INLINE SVG DEFINITION BLOCK (Guarantees logo renders instantly everywhere) -->
-    <svg xmlns="http://www.w3.org/2000/svg" style="display: none;">
+    <svg xmlns="http://www.w3.org/2000/svg" style="position: absolute; width: 0; height: 0; overflow: hidden;">
         <defs>
             <linearGradient id="goldGradient" x1="0%" y1="0%" x2="100%" y2="100%">
                 <stop offset="0%" stop-color="#F5D061" />
@@ -172,7 +174,7 @@
         <div
             class="border-2 border-weddingGold p-8 rounded-3xl max-w-sm w-full bg-[#1C1416] relative flex flex-col items-center shadow-2xl">
             <!-- Custom Dynamic Wave Monogram Logo -->
-            <div class="mb-6">
+            <div class="mb-6 transform hover:scale-105 transition-transform duration-300">
                 <img src="https://img.freepik.com/premium-vector/water-wave-rs-logo-vector-swoosh-letter-rs-logo-design-business-company-identity_754537-834.jpg?w=2000"
                     alt="RS Wedding Logo"
                     class="w-32 h-32 rounded-full border-2 border-weddingGold shadow-lg object-cover"
@@ -192,21 +194,21 @@
     </div>
 
     <!-- Floating Audio Control Widget -->
-    <div class="fixed bottom-6 right-6 z-[100] flex flex-col items-end gap-2">
+    <div class="fixed bottom-6 right-6 z-[100] flex flex-col items-end gap-2 select-none">
         <!-- Music Toast Badge -->
         <div id="musicToast"
             class="bg-weddingRed/90 backdrop-blur-sm border border-weddingGold text-weddingGold text-[10px] tracking-wider px-3.5 py-1.5 rounded-full shadow-lg transition-all duration-500 opacity-0 translate-y-2 pointer-events-none select-none font-semibold flex items-center gap-1.5">
             <i class="fa-solid fa-compact-disc animate-spin text-[10px]"></i>
-            <span id="musicToastText">Playing Ambient Sitar & Flute</span>
+            <span id="musicToastText">Playing Ambient Piano Melody</span>
         </div>
+
         <button id="musicToggle"
-            class="bg-weddingRed border-2 border-weddingGold text-white w-12 h-12 rounded-full shadow-xl flex items-center justify-center hover:bg-weddingGold transition-all duration-300">
+            class="bg-weddingRed border-2 border-weddingGold text-white w-12 h-12 rounded-full shadow-xl flex items-center justify-center hover:bg-weddingGold hover:text-weddingRed transition-all duration-300 transform active:scale-95">
             <i id="musicIcon" class="fa-solid fa-music text-lg"></i>
         </button>
+
         <!-- Background Audio Element -->
-        <audio id="weddingMusic" loop>
-            <source id="audioSource" src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3"
-                type="audio/mpeg">
+        <audio id="weddingMusic" loop src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-3.mp3">
         </audio>
     </div>
 
@@ -218,11 +220,24 @@
 
     <header
         class="py-14 px-4 text-center flex flex-col items-center justify-center bg-gradient-to-b from-[#FFF5F6] to-weddingCream/10 relative z-10">
-        <!-- Upgraded Dynamic Wave Monogram Logo in Header (Guaranteed visible) -->
+        <!-- HEADER IMAGE AREA (Customize to swap Logo with Couple's Photo after your shoot) -->
         <div class="mb-6 transform hover:scale-105 transition-transform duration-300">
-            <svg class="w-32 h-32 filter drop-shadow-md" viewBox="0 0 120 120">
-                <use href="#rs-monogram"></use>
-            </svg>
+            <!-- CURRENT: Circular Monogram Logo (Active by default) -->
+            <!-- To hide the logo when swapping, add the class 'hidden' to the img tag below -->
+            <img id="headerLogo"
+                src="https://img.freepik.com/premium-vector/water-wave-rs-logo-vector-swoosh-letter-rs-logo-design-business-company-identity_754537-834.jpg?w=2000"
+                alt="RS Wedding Logo"
+                class="w-32 h-32 rounded-full border-2 border-weddingGold shadow-lg object-cover mx-auto"
+                onerror="this.style.display='none'">
+
+            <!-- FUTURE: Couple's Portrait Photo (Arched Elegant Frame) -->
+            <!-- To display your couple's photo after your shoot:
+                 1. Place your photo file (e.g. couple_photo.jpg) in the project folder
+                 2. Set the src path below to 'couple_photo.jpg' (or your hosted URL)
+                 3. Remove the 'hidden' class from the img tag below, and add 'hidden' to the img above (#headerLogo) -->
+            <img id="headerPhoto" src="https://images.unsplash.com/photo-1519741497674-611481863552?q=80&w=1000"
+                alt="Supraja & Rohith"
+                class="hidden w-56 h-72 rounded-t-full border-4 border-weddingGold shadow-2xl object-cover mx-auto">
         </div>
 
         <h1 class="font-royal text-weddingGold text-xs sm:text-sm tracking-[0.3em] font-bold uppercase mb-2">SAVE THE
@@ -230,7 +245,7 @@
 
         <div class="my-4">
             <h2 class="font-royal text-weddingRed text-4xl sm:text-6xl font-extrabold leading-tight">Supraja</h2>
-            <span class="font-cursive text-weddingGold text-5xl block my-1">&</span>
+            <span class="font-royal text-weddingGold text-5xl block my-1">&</span>
             <h2 class="font-royal text-weddingRed text-4xl sm:text-6xl font-extrabold leading-tight">Rohith</h2>
         </div>
 
@@ -304,6 +319,13 @@
                 </div>
                 <p id="timerMessage" class="text-xs italic text-[#8B6E32] mt-4 font-semibold">August 27, 2026 • Bless
                     our sacred bond with your presence.</p>
+
+                <!-- Add to Google Calendar Button -->
+                <a href="https://calendar.google.com/calendar/render?action=TEMPLATE&text=Supraja+%26+Rohith%27s+Wedding+Celebration&dates=20260827T055000Z/20260827T103000Z&details=We+cordially+invite+you+to+bless+our+sacred+bond+with+your+presence.+Check+out+the+wedding+details+and+routes+on+our+invitation+website!&location=Parinaya+Conventions,+Turkayamjal,+Hyderabad&sf=true&output=xml"
+                    target="_blank"
+                    class="mt-4 inline-flex items-center gap-2 text-[10px] uppercase tracking-[0.15em] font-bold text-weddingRed border border-weddingRed/20 hover:border-weddingGold/60 hover:text-weddingGold bg-[#FAF1F3]/40 hover:bg-[#FFFDF9] px-5 py-2.5 rounded-full transition-all duration-300 transform active:scale-95 shadow-sm">
+                    <i class="fa-regular fa-calendar-plus text-xs"></i> Add to Google Calendar
+                </a>
             </div>
         </section>
 
@@ -322,16 +344,16 @@
                     <p class="text-sm font-semibold mb-4 text-[#8B6E32]">Who do you know best from the couple?</p>
                     <div class="grid grid-cols-3 gap-3">
                         <button onclick="selectGamerPerson('supraja')"
-                            class="py-3 px-2 rounded-xl border border-weddingGold/40 text-xs font-semibold hover:bg-[#FAF1F3] active:bg-[#F3DEE1] transition-all flex flex-col items-center gap-1 text-weddingRed">
+                            class="py-3 px-2 rounded-xl border border-weddingRed/30 text-xs font-semibold hover:bg-weddingRed/5 active:bg-weddingRed/10 transition-all flex flex-col items-center gap-1 text-weddingRed">
                             <i class="fa-solid fa-face-smile text-lg"></i> Supraja
                         </button>
                         <button onclick="selectGamerPerson('both')"
-                            class="py-3 px-2 rounded-xl border-2 border-weddingGold text-xs font-bold hover:bg-[#FFFDF9] active:bg-[#FBEED7] transition-all flex flex-col items-center gap-1 text-[#8B6E32]">
-                            <i class="fa-solid fa-heart text-lg text-weddingRed"></i> Both!
+                            class="py-3 px-2 rounded-xl border-2 border-weddingGold text-xs font-bold hover:bg-[#F4FAF6] active:bg-[#E3F2E9] transition-all flex flex-col items-center gap-1 text-[#0D5C3A]">
+                            <i class="fa-solid fa-heart text-lg text-[#0D5C3A]"></i> Both!
                         </button>
                         <button onclick="selectGamerPerson('rohith')"
-                            class="py-3 px-2 rounded-xl border border-weddingGold/40 text-xs font-semibold hover:bg-weddingCream active:bg-[#F5EDDA] transition-all flex flex-col items-center gap-1 text-weddingGold">
-                            <i class="fa-solid fa-face-smile-wink text-lg"></i> Rohith
+                            class="py-3 px-2 rounded-xl border border-weddingGold/50 text-xs font-semibold hover:bg-weddingGold/5 active:bg-weddingGold/10 transition-all flex flex-col items-center gap-1 text-[#8B6E32]">
+                            <i class="fa-solid fa-face-smile-wink text-lg text-[#8B6E32]"></i> Rohith
                         </button>
                     </div>
                 </div>
@@ -391,7 +413,7 @@
 
                 <!-- CARD 1: ENGAGEMENT -->
                 <div onclick="openEvent('engagement')"
-                    class="group cursor-pointer relative rounded-2xl overflow-hidden shadow-lg border-2 border-weddingGold transition-all duration-300 hover:scale-105 bg-gradient-to-b from-[#FFF5F6] to-[#FFE1E5] p-6 text-center flex flex-col justify-between items-center h-64">
+                    class="group cursor-pointer relative rounded-2xl overflow-hidden shadow-lg border-2 border-weddingGold transition-all duration-300 hover:scale-105 hover:shadow-[0_0_22px_rgba(212,175,55,0.6)] bg-gradient-to-b from-[#FFF5F6] to-[#FFE1E5] p-6 text-center flex flex-col justify-between items-center h-64">
                     <div class="text-[#C15C6C] text-3xl mt-4"><i class="fa-solid fa-ring pulse-heart"></i></div>
                     <div>
                         <h4 class="font-royal text-lg font-bold text-weddingRed tracking-wider">The Engagement</h4>
@@ -408,7 +430,7 @@
 
                 <!-- CARD 2: HALDI & SANGEET -->
                 <div onclick="openEvent('haldi')"
-                    class="group cursor-pointer relative rounded-2xl overflow-hidden shadow-lg border-2 border-weddingGold transition-all duration-300 hover:scale-105 bg-gradient-to-b from-[#FFFDF0] to-[#FFF8D2] p-6 text-center flex flex-col justify-between items-center h-64">
+                    class="group cursor-pointer relative rounded-2xl overflow-hidden shadow-lg border-2 border-weddingGold transition-all duration-300 hover:scale-105 hover:shadow-[0_0_22px_rgba(212,175,55,0.6)] bg-gradient-to-b from-[#FFFDF0] to-[#FFF8D2] p-6 text-center flex flex-col justify-between items-center h-64">
                     <div class="text-[#D49B00] text-3xl mt-4"><i
                             class="fa-solid fa-wand-magic-sparkles pulse-heart"></i></div>
                     <div>
@@ -425,7 +447,7 @@
 
                 <!-- CARD 3: WEDDING -->
                 <div onclick="openEvent('wedding')"
-                    class="group cursor-pointer relative rounded-2xl overflow-hidden shadow-lg border-2 border-weddingGold transition-all duration-300 hover:scale-105 bg-gradient-to-b from-[#FAF3F4] to-[#F1D6DA] p-6 text-center flex flex-col justify-between items-center h-64">
+                    class="group cursor-pointer relative rounded-2xl overflow-hidden shadow-lg border-2 border-weddingGold transition-all duration-300 hover:scale-105 hover:shadow-[0_0_22px_rgba(212,175,55,0.6)] bg-gradient-to-b from-[#FAF3F4] to-[#F1D6DA] p-6 text-center flex flex-col justify-between items-center h-64">
                     <div class="text-weddingRed text-3xl mt-4"><i class="fa-solid fa-gopuram pulse-heart"></i></div>
                     <div>
                         <h4 class="font-royal text-lg font-bold text-weddingRed tracking-wider">The Wedding</h4>
@@ -441,7 +463,7 @@
 
                 <!-- CARD 4: RECEPTION -->
                 <div onclick="openEvent('reception')"
-                    class="group cursor-pointer relative rounded-2xl overflow-hidden shadow-lg border-2 border-weddingGold transition-all duration-300 hover:scale-105 bg-gradient-to-b from-[#F3F4FB] to-[#DDE2F2] p-6 text-center flex flex-col justify-between items-center h-64">
+                    class="group cursor-pointer relative rounded-2xl overflow-hidden shadow-lg border-2 border-weddingGold transition-all duration-300 hover:scale-105 hover:shadow-[0_0_22px_rgba(212,175,55,0.6)] bg-gradient-to-b from-[#F3F4FB] to-[#DDE2F2] p-6 text-center flex flex-col justify-between items-center h-64">
                     <div class="text-[#2E3D62] text-3xl mt-4"><i class="fa-solid fa-champagne-glasses pulse-heart"></i>
                     </div>
                     <div>
@@ -700,11 +722,11 @@
         const entryModal = document.getElementById('entryModal');
         const playBtn = document.getElementById('musicToggle');
         const playIcon = document.getElementById('musicIcon');
-        const sourceElement = document.getElementById('audioSource');
 
-        // Lower volume limits for soft background play
-        const MAX_VOLUME = 0.20;
-        player.volume = MAX_VOLUME;
+        // Start with a soft background volume (10%) and slow dreamlike playback (85%)
+        let userVolumeSetting = 0.10;
+        player.volume = userVolumeSetting;
+        player.playbackRate = 0.85;
 
         let musicActive = false;
         let wasPlayingBeforeBackground = false;
@@ -727,13 +749,13 @@
             }, 3000);
         }
 
-        // Define elegant royalty-free loops representing the events
+        // Define elegant loops representing the events from SoundHelix (pleasant, soft background tracks)
         const tracks = {
-            ambient: { url: 'https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3', name: 'Ambient Sitar & Flute' },
-            engagement: { url: 'https://www.soundhelix.com/examples/mp3/SoundHelix-Song-3.mp3', name: 'Elegant Piano & Sitar' },
-            haldi: { url: 'https://www.soundhelix.com/examples/mp3/SoundHelix-Song-6.mp3', name: 'Celebratory Sangeet Beats' },
-            wedding: { url: 'https://www.soundhelix.com/examples/mp3/SoundHelix-Song-8.mp3', name: 'Auspicious Wedding Shehnai' },
-            reception: { url: 'https://www.soundhelix.com/examples/mp3/SoundHelix-Song-4.mp3', name: 'Grand Twilight Violin' }
+            ambient: { url: 'https://www.soundhelix.com/examples/mp3/SoundHelix-Song-3.mp3', name: 'Ambient Piano Melody' },
+            engagement: { url: 'https://www.soundhelix.com/examples/mp3/SoundHelix-Song-7.mp3', name: 'Gentle Acoustic Guitar' },
+            haldi: { url: 'https://www.soundhelix.com/examples/mp3/SoundHelix-Song-11.mp3', name: 'Relaxed Acoustic Theme' },
+            wedding: { url: 'https://www.soundhelix.com/examples/mp3/SoundHelix-Song-15.mp3', name: 'Meditative Ambient Pad' },
+            reception: { url: 'https://www.soundhelix.com/examples/mp3/SoundHelix-Song-16.mp3', name: 'Soft Twilight Acoustic' }
         };
 
         let currentTrackUrl = tracks.ambient.url;
@@ -745,6 +767,10 @@
             setTimeout(() => {
                 entryModal.style.display = 'none';
             }, 600);
+
+            // Apply slow and soft configurations
+            player.volume = userVolumeSetting;
+            player.playbackRate = 0.85;
 
             player.play().then(() => {
                 musicActive = true;
@@ -764,6 +790,7 @@
                 }
             } else {
                 if (wasPlayingBeforeBackground) {
+                    player.playbackRate = 0.85;
                     player.play().then(() => {
                         wasPlayingBeforeBackground = false;
                     });
@@ -774,6 +801,7 @@
         // Floating controls
         playBtn.addEventListener('click', function () {
             if (player.paused) {
+                player.playbackRate = 0.85;
                 player.play();
                 musicActive = true;
             } else {
@@ -793,6 +821,7 @@
             }
         }
 
+        let fadeInterval;
         // Crossfade Dynamic Audio Routing
         function switchMusic(trackKey) {
             if (!musicActive) return;
@@ -801,19 +830,41 @@
 
             currentTrackUrl = target.url;
 
+            // Clear any existing fade interval to prevent overlapping timers
+            clearInterval(fadeInterval);
+
             // Fade out smoothly
-            let fadeOut = setInterval(() => {
-                if (player.volume > 0.05) {
-                    player.volume = Math.max(0, player.volume - 0.05);
+            fadeInterval = setInterval(() => {
+                if (player.volume > 0.01) {
+                    player.volume = Math.max(0, player.volume - 0.01);
                 } else {
-                    clearInterval(fadeOut);
+                    clearInterval(fadeInterval);
+                    fadeInterval = null;
+
                     player.pause();
-                    sourceElement.src = target.url;
-                    player.load();
-                    player.volume = MAX_VOLUME;
+                    player.src = target.url;
+                    player.volume = 0;
+
+                    // Force the relaxed tempo speed
+                    player.playbackRate = 0.85;
+
                     player.play().then(() => {
                         showNowPlayingBadge(target.name);
-                    }).catch(err => console.log(err));
+
+                        // Fade in smoothly to user's volume setting
+                        fadeInterval = setInterval(() => {
+                            if (player.volume < userVolumeSetting) {
+                                player.volume = Math.min(userVolumeSetting, player.volume + 0.01);
+                            } else {
+                                clearInterval(fadeInterval);
+                                fadeInterval = null;
+                            }
+                        }, 30);
+                    }).catch(err => {
+                        console.log("Error transitioning tracks:", err);
+                        player.volume = userVolumeSetting;
+                        fadeInterval = null;
+                    });
                 }
             }, 30);
         }
@@ -822,8 +873,11 @@
         let activeTheme = 'ambient';
 
         function openEvent(eventKey) {
-            // Hide any other active overlay
-            closeEvent();
+            // Visually hide any active overlays directly without triggering ambient music switch
+            document.querySelectorAll('[id^="modal-"]').forEach(modal => {
+                modal.classList.remove('modal-active');
+                modal.classList.add('modal-inactive');
+            });
 
             // Select overlay element
             const modal = document.getElementById(`modal-${eventKey}`);
