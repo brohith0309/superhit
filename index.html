@@ -23,16 +23,6 @@
                         weddingGold: '#D4AF37',     /* Traditional Gold */
                         weddingCream: '#FFFDF9',    /* Premium Soft Cream */
                         charcoal: '#2D2D2D',
-                        
-                        /* Event Specific Theme Tokens */
-                        themeEngageBg: '#FFF5F6',
-                        themeEngagePrimary: '#C15C6C',
-                        themeHaldiBg: '#FFFDF0',
-                        themeHaldiPrimary: '#D49B00',
-                        themeWeddingBg: '#FAF3F4',
-                        themeWeddingPrimary: '#7A1C2C',
-                        themeReceptBg: '#F3F4FB',
-                        themeReceptPrimary: '#2E3D62'
                     },
                     fontFamily: {
                         royal: ['"Cinzel Decorative"', 'serif'],
@@ -46,18 +36,18 @@
     </script>
 
     <style>
-        /* Base Styling */
+        /* Base Styling & Classy Watermark Background using our premium geometric Monogram */
         body {
             background-color: #FFFDF9;
-            background-image: radial-gradient(#d4af3710 1px, transparent 1px);
-            background-size: 24px 24px;
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='140' height='140' viewBox='0 0 100 100'%3E%3Cg opacity='0.025'%3E%3Ccircle cx='50' cy='50' r='38' fill='none' stroke='%237A1C2C' stroke-width='0.4'/%3E%3Cpath d='M35,35 C42,20 58,20 65,35 C65,48 35,45 35,60 C35,65 65,65 65,60' fill='none' stroke='%237A1C2C' stroke-width='1' stroke-linecap='round'/%3E%3Cpath d='M65,40 C58,45 42,48 45,55 C48,62 58,58 55,68' fill='none' stroke='%23D4AF37' stroke-width='0.8' stroke-linecap='round'/%3E%3C/g%3E%3C/svg%3E");
+            background-size: 140px 140px;
             scroll-behavior: smooth;
             -webkit-tap-highlight-color: transparent;
         }
 
-        /* Fluid layout shadows */
+        /* Fluid layout premium card stylings */
         .royal-card {
-            background: rgba(255, 255, 255, 0.95);
+            background: rgba(255, 255, 255, 0.96);
             border: 2px solid #D4AF37;
             box-shadow: 0 15px 35px rgba(122, 28, 44, 0.08);
             position: relative;
@@ -73,96 +63,110 @@
             border-radius: inherit;
         }
 
+        /* Wax-sealed Event Envelopes */
+        .wax-seal-btn {
+            background: radial-gradient(circle, #A52A2A 0%, #7A1C2C 100%);
+            box-shadow: 0 4px 10px rgba(122, 28, 44, 0.3), inset 0 2px 4px rgba(255,255,255,0.2);
+            border: 1px solid #5C121E;
+        }
+
         /* Pulsing animations */
         @keyframes pulse-slow {
             0%, 100% { transform: scale(1); opacity: 0.9; }
-            50% { transform: scale(1.05); opacity: 1; }
+            50% { transform: scale(1.04); opacity: 1; }
         }
         .pulse-heart {
-            animation: pulse-slow 2s infinite ease-in-out;
+            animation: pulse-slow 2.5s infinite ease-in-out;
         }
 
-        /* Spin Animation for Decorative Mandalas */
-        @keyframes spin-slow {
-            0% { transform: rotate(0deg); }
-            100% { transform: rotate(360deg); }
+        /* Custom Modal Transitions mimicking physical card slidings */
+        .modal-active {
+            opacity: 1;
+            transform: scale(1);
+            pointer-events: auto;
         }
-        .mandala-spin {
-            animation: spin-slow 60s infinite linear;
-            opacity: 0.04;
+        .modal-inactive {
+            opacity: 0;
+            transform: scale(0.92);
+            pointer-events: none;
         }
 
-        /* Petal Shower Canvas Overlay */
+        /* Petal Shower Canvas Overlay on the FOREGROUND */
         #petalCanvas {
             position: fixed;
             top: 0;
             left: 0;
             width: 100%;
             height: 100%;
-            pointer-events: none;
-            z-index: 10;
-        }
-
-        /* Hidden class helper */
-        .tab-content {
-            display: none;
-        }
-        .tab-content.active {
-            display: block;
-        }
-
-        /* Custom Scrollbar for mobile panels */
-        ::-webkit-scrollbar {
-            width: 4px;
-        }
-        ::-webkit-scrollbar-thumb {
-            background: #D4AF37;
-            border-radius: 10px;
+            pointer-events: none; /* Allows users to tap/scroll through the falling petals */
+            z-index: 99; /* Highest foreground overlay */
         }
     </style>
 </head>
 <body class="font-sansBody text-charcoal relative overflow-x-hidden pb-24 md:pb-8">
 
-    <!-- Petal Shower Canvas Overlay -->
+    <!-- Foreground Petal Shower Canvas -->
     <canvas id="petalCanvas"></canvas>
 
-    <!-- Invitation Entry / Autoplay Unblocker Modal -->
+    <!-- Invitation Entry Modal (Unblocks browser autoplay audio policies) -->
     <div id="entryModal" class="fixed inset-0 bg-[#0F0A0B] z-[9999] flex flex-col items-center justify-center p-6 text-center">
         <!-- Golden Decorative Frame inside entry modal -->
         <div class="border-2 border-weddingGold p-8 rounded-3xl max-w-sm w-full bg-[#1C1416] relative flex flex-col items-center shadow-2xl">
-            <!-- Royal Monogram -->
+            <!-- Interlocking Luxury Monogram Crest Emblem -->
             <div class="mb-6">
-                <svg class="w-24 h-24" viewBox="0 0 100 100">
-                    <circle cx="50" cy="50" r="44" fill="none" stroke="#D4AF37" stroke-width="1.5" stroke-dasharray="3 3"/>
-                    <circle cx="50" cy="50" r="40" fill="none" stroke="#D4AF37" stroke-width="0.5"/>
-                    <text x="50" y="58" font-family="'Cinzel Decorative', serif" font-size="28" fill="#D4AF37" text-anchor="middle" font-weight="bold">RS</text>
+                <svg class="w-28 h-28" viewBox="0 0 120 120">
+                    <defs>
+                        <linearGradient id="goldGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+                            <stop offset="0%" stop-color="#D4AF37" />
+                            <stop offset="30%" stop-color="#FFF3CD" />
+                            <stop offset="70%" stop-color="#AA7C11" />
+                            <stop offset="100%" stop-color="#D4AF37" />
+                        </linearGradient>
+                        <filter id="shadow">
+                            <feDropShadow dx="0" dy="1.5" stdDeviation="1.5" flood-color="#000" flood-opacity="0.3"/>
+                        </filter>
+                    </defs>
+                    <!-- Botanical Wreath Frame -->
+                    <circle cx="60" cy="60" r="54" fill="none" stroke="url(#goldGradient)" stroke-width="1" stroke-dasharray="3 3"/>
+                    <circle cx="60" cy="60" r="50" fill="none" stroke="url(#goldGradient)" stroke-width="1.5"/>
+                    <g filter="url(#shadow)">
+                        <!-- Sophisticated intertwined geometric curves representing R and S -->
+                        <!-- S Character curve background -->
+                        <path d="M 43,45 C 43,30 77,30 77,45 C 77,60 43,58 43,75 C 43,82 77,82 77,75" fill="none" stroke="#7A1C2C" stroke-width="5" stroke-linecap="round"/>
+                        <path d="M 43,45 C 43,30 77,30 77,45 C 77,60 43,58 43,75 C 43,82 77,82 77,75" fill="none" stroke="url(#goldGradient)" stroke-width="2" stroke-linecap="round"/>
+                        
+                        <!-- R Character intersecting line -->
+                        <path d="M 46,35 L 46,85 M 46,38 C 68,36 68,58 46,58 L 73,85" fill="none" stroke="url(#goldGradient)" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round"/>
+                        <path d="M 46,35 L 46,85 M 46,38 C 68,36 68,58 46,58 L 73,85" fill="none" stroke="#7A1C2C" stroke-width="1" stroke-linecap="round" stroke-linejoin="round"/>
+                    </g>
+                    <text x="60" y="103" font-family="'Cinzel Decorative', serif" font-size="9" fill="url(#goldGradient)" text-anchor="middle" letter-spacing="2">SUPRAJA & ROHITH</text>
                 </svg>
             </div>
-            <h2 class="font-royal text-weddingGold text-sm tracking-[0.2em] mb-2">SHUBH VIVAH</h2>
+            
+            <h2 class="font-royal text-weddingGold text-xs tracking-[0.2em] mb-2">SHUBH VIVAH</h2>
             <p class="font-serifHeading italic text-white text-lg mb-6">Supraja & Rohith</p>
             <div class="w-12 h-[1px] bg-weddingGold mb-6"></div>
-            <p class="text-xs text-gray-400 mb-8 tracking-wide">Step into our celebration of love and togetherness</p>
+            <p class="text-xs text-gray-400 mb-8 tracking-wide">Enter to experience our celebration with music</p>
             
-            <button id="enterBtn" class="bg-gradient-to-r from-weddingGold to-[#B89228] text-weddingRed font-bold py-3 px-8 rounded-full shadow-lg hover:scale-105 active:scale-95 transition-all text-xs tracking-[0.15em] uppercase flex items-center gap-2">
+            <button id="enterBtn" class="bg-gradient-to-r from-weddingGold to-[#B89228] text-weddingRed font-bold py-3.5 px-8 rounded-full shadow-lg hover:scale-105 active:scale-95 transition-all text-xs tracking-[0.15em] uppercase flex items-center gap-2">
                 <i class="fa-solid fa-music animate-bounce"></i> Enter Invitation
             </button>
         </div>
     </div>
 
-    <!-- Floating Audio/Music Controller -->
-    <div class="fixed bottom-24 right-6 z-50 md:bottom-6">
+    <!-- Floating Audio Control Widget -->
+    <div class="fixed bottom-6 right-6 z-[100] flex flex-col items-end gap-2">
+        <div id="nowPlayingBadge" class="bg-white/95 border border-weddingGold/50 px-3 py-1.5 rounded-full text-[10px] font-bold tracking-wider text-weddingRed shadow-lg flex items-center gap-2 transition-all duration-300 opacity-0 transform translate-y-2">
+            <span class="w-2 h-2 rounded-full bg-green-500 animate-ping"></span>
+            <span id="nowPlayingText">Playing: Light Sitar-Flute</span>
+        </div>
         <button id="musicToggle" class="bg-weddingRed border-2 border-weddingGold text-white w-12 h-12 rounded-full shadow-xl flex items-center justify-center hover:bg-weddingGold transition-all duration-300">
             <i id="musicIcon" class="fa-solid fa-music text-lg"></i>
         </button>
-        <!-- Auspicious traditional Shehnai track -->
+        <!-- Background Audio Element -->
         <audio id="weddingMusic" loop>
-            <source src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-8.mp3" type="audio/mpeg">
+            <source id="audioSource" src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3" type="audio/mpeg">
         </audio>
-    </div>
-
-    <!-- Floating Background Decor -->
-    <div class="absolute top-10 -left-20 w-80 h-80 pointer-events-none select-none z-0">
-        <img src="https://images.unsplash.com/photo-1617627143750-d86bc21e42bb?q=80&w=200" class="mandala-spin w-full h-full object-contain filter invert opacity-10" alt="Mandala border">
     </div>
 
     <!-- Celebratory Top Announcement Banner -->
@@ -170,65 +174,44 @@
         ✨ Shubh Vivah — You are Cordially Invited ✨
     </div>
 
-    <!-- Core Brand Header -->
-    <header class="py-10 px-4 text-center flex flex-col items-center justify-center bg-gradient-to-b from-[#FFF5F6] to-weddingCream relative z-10">
-        <!-- SVG Monogram Logo (R&S) -->
-        <div class="mb-4">
-            <svg class="w-20 h-20 filter drop-shadow-md" viewBox="0 0 100 100">
-                <circle cx="50" cy="50" r="44" fill="none" stroke="#7A1C2C" stroke-width="1.5" stroke-dasharray="3 3"/>
-                <circle cx="50" cy="50" r="40" fill="none" stroke="#D4AF37" stroke-width="1"/>
-                <path d="M 40,35 C 40,25 60,25 60,35 C 60,45 40,40 40,55 L 40,65 M 40,50 L 58,65" fill="none" stroke="#7A1C2C" stroke-width="3" stroke-linecap="round"/>
-                <path d="M 60,38 C 55,42 45,45 50,52 C 55,59 60,54 55,65" fill="none" stroke="#D4AF37" stroke-width="2" stroke-linecap="round"/>
-                <path d="M 43,48 Q 50,46 57,48" fill="none" stroke="#D4AF37" stroke-width="1.5"/>
+    <header class="py-14 px-4 text-center flex flex-col items-center justify-center bg-gradient-to-b from-[#FFF5F6] to-weddingCream/10 relative z-10">
+        <!-- Upgraded Geometric Monogram Logo -->
+        <div class="mb-6 transform hover:scale-105 transition-transform duration-300">
+            <svg class="w-28 h-28 filter drop-shadow-md" viewBox="0 0 120 120">
+                <circle cx="60" cy="60" r="54" fill="none" stroke="#7A1C2C" stroke-width="1" stroke-dasharray="3 3"/>
+                <circle cx="60" cy="60" r="50" fill="none" stroke="#D4AF37" stroke-width="1.5"/>
+                <g filter="url(#shadow)">
+                    <!-- Back Layer Crimson S -->
+                    <path d="M 43,45 C 43,30 77,30 77,45 C 77,60 43,58 43,75 C 43,82 77,82 77,75" fill="none" stroke="#7A1C2C" stroke-width="5" stroke-linecap="round"/>
+                    <!-- Front Layer Metallic Gold S -->
+                    <path d="M 43,45 C 43,30 77,30 77,45 C 77,60 43,58 43,75 C 43,82 77,82 77,75" fill="none" stroke="url(#goldGradient)" stroke-width="2.5" stroke-linecap="round"/>
+                    <!-- Intersecting Gold & Crimson R -->
+                    <path d="M 46,35 L 46,85 M 46,38 C 68,36 68,58 46,58 L 73,85" fill="none" stroke="url(#goldGradient)" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round"/>
+                    <path d="M 46,35 L 46,85 M 46,38 C 68,36 68,58 46,58 L 73,85" fill="none" stroke="#7A1C2C" stroke-width="1" stroke-linecap="round" stroke-linejoin="round"/>
+                </g>
+                <text x="60" y="103" font-family="'Cinzel Decorative', serif" font-size="8" fill="#7A1C2C" text-anchor="middle" letter-spacing="1.5" font-weight="bold">R & S</text>
             </svg>
         </div>
         
         <h1 class="font-royal text-weddingGold text-xs sm:text-sm tracking-[0.3em] font-bold uppercase mb-2">SAVE THE DATE</h1>
         
         <div class="my-4">
-            <h2 class="font-royal text-weddingRed text-3xl sm:text-5xl font-extrabold leading-tight">Supraja</h2>
-            <span class="font-cursive text-weddingGold text-4xl block my-1">&</span>
-            <h2 class="font-royal text-weddingRed text-3xl sm:text-5xl font-extrabold leading-tight">Rohith</h2>
+            <h2 class="font-royal text-weddingRed text-4xl sm:text-6xl font-extrabold leading-tight">Supraja</h2>
+            <span class="font-cursive text-weddingGold text-5xl block my-1">&</span>
+            <h2 class="font-royal text-weddingRed text-4xl sm:text-6xl font-extrabold leading-tight">Rohith</h2>
         </div>
         
         <!-- #SUPERHIT Branding Tag -->
-        <div class="bg-weddingGold text-weddingRed px-6 py-1.5 rounded-full font-royal text-xs font-bold tracking-[0.25em] shadow-sm mt-3 pulse-heart">
+        <div class="bg-weddingGold text-weddingRed px-8 py-2 rounded-full font-royal text-xs font-bold tracking-[0.25em] shadow-md mt-4 pulse-heart">
             #SUPERHIT
         </div>
     </header>
 
-    <!-- Navigation Tabs for Custom-themed views -->
-    <nav class="max-w-xl mx-auto px-4 mt-6 sticky top-4 z-40">
-        <div class="bg-white/90 backdrop-blur-md p-1.5 rounded-full border border-weddingGold/30 shadow-lg flex items-center justify-between">
-            <button onclick="switchTab('home')" id="btn-home" class="nav-tab flex-1 py-2.5 px-3 rounded-full text-xs font-bold tracking-wider transition-all duration-300 flex flex-col items-center justify-center gap-1 bg-weddingRed text-white">
-                <i class="fa-solid fa-house"></i>
-                <span class="hidden md:inline">Home</span>
-            </button>
-            <button onclick="switchTab('engagement')" id="btn-engagement" class="nav-tab flex-1 py-2.5 px-3 rounded-full text-xs font-bold tracking-wider transition-all duration-300 text-[#888] hover:text-weddingRed flex flex-col items-center justify-center gap-1">
-                <i class="fa-solid fa-ring"></i>
-                <span class="hidden md:inline">Engage</span>
-            </button>
-            <button onclick="switchTab('haldi')" id="btn-haldi" class="nav-tab flex-1 py-2.5 px-3 rounded-full text-xs font-bold tracking-wider transition-all duration-300 text-[#888] hover:text-weddingRed flex flex-col items-center justify-center gap-1">
-                <i class="fa-solid fa-wand-magic-sparkles"></i>
-                <span class="hidden md:inline">Haldi</span>
-            </button>
-            <button onclick="switchTab('wedding')" id="btn-wedding" class="nav-tab flex-1 py-2.5 px-3 rounded-full text-xs font-bold tracking-wider transition-all duration-300 text-[#888] hover:text-weddingRed flex flex-col items-center justify-center gap-1">
-                <i class="fa-solid fa-gopuram"></i>
-                <span class="hidden md:inline">Wedding</span>
-            </button>
-            <button onclick="switchTab('reception')" id="btn-reception" class="nav-tab flex-1 py-2.5 px-3 rounded-full text-xs font-bold tracking-wider transition-all duration-300 text-[#888] hover:text-weddingRed flex flex-col items-center justify-center gap-1">
-                <i class="fa-solid fa-champagne-glasses"></i>
-                <span class="hidden md:inline">Recept</span>
-            </button>
-        </div>
-    </nav>
+    <!-- MAIN APP SCROLLABLE CONTAINER -->
+    <main class="max-w-4xl mx-auto px-4 mt-4 pb-12 z-20 relative space-y-16">
 
-    <!-- MAIN APP WRAPPER -->
-    <main class="max-w-4xl mx-auto px-4 mt-8 pb-12 z-20 relative">
-
-        <!-- ================= HOME TAB ================= -->
-        <section id="tab-home" class="tab-content active space-y-10">
-            <!-- Live Countdown Timer Block -->
+        <!-- Countdown Timer Section -->
+        <section>
             <div class="royal-card max-w-md mx-auto rounded-3xl p-6 sm:p-8 text-center bg-white/95 border-weddingGold">
                 <p class="font-royal text-xs tracking-[0.2em] text-weddingRed font-bold mb-4 uppercase">The Muhurtham Approaches</p>
                 
@@ -252,47 +235,16 @@
                 </div>
                 <p id="timerMessage" class="text-xs italic text-[#8B6E32] mt-4 font-semibold">August 27, 2026 • Bless our sacred bond with your presence.</p>
             </div>
+        </section>
 
-            <!-- Summary Event Timetable -->
-            <div class="text-center">
-                <h3 class="font-royal text-weddingRed text-2xl font-bold tracking-wider mb-2">Our Auspicious Journey</h3>
-                <p class="font-serifHeading italic text-weddingGold text-sm mb-6">Select tabs above to see full details, themes & routes</p>
-                
-                <div class="grid sm:grid-cols-2 md:grid-cols-4 gap-4">
-                    <!-- Event Summary Card -->
-                    <div onclick="switchTab('engagement')" class="bg-white border border-[#F0D5D9] p-4 rounded-2xl shadow-sm text-center cursor-pointer hover:shadow-md hover:scale-[1.02] transition-all">
-                        <span class="text-[#C15C6C] text-lg"><i class="fa-solid fa-ring"></i></span>
-                        <h4 class="font-royal text-xs font-bold text-weddingRed tracking-wider mt-2">The Engagement</h4>
-                        <p class="text-[11px] text-gray-500 mt-1">July 02, 2026</p>
-                        <span class="text-[9px] text-[#C15C6C] font-semibold mt-2 block uppercase">View Venue →</span>
-                    </div>
-                    <div onclick="switchTab('haldi')" class="bg-white border border-[#FFF1C2] p-4 rounded-2xl shadow-sm text-center cursor-pointer hover:shadow-md hover:scale-[1.02] transition-all">
-                        <span class="text-[#D49B00] text-lg"><i class="fa-solid fa-wand-magic-sparkles"></i></span>
-                        <h4 class="font-royal text-xs font-bold text-[#7A5A00] tracking-wider mt-2">Haldi & Sangeet</h4>
-                        <p class="text-[11px] text-gray-500 mt-1">August 16, 2026</p>
-                        <span class="text-[9px] text-[#D49B00] font-semibold mt-2 block uppercase">View Venue →</span>
-                    </div>
-                    <div onclick="switchTab('wedding')" class="bg-white border border-[#F0D5D9] p-4 rounded-2xl shadow-sm text-center cursor-pointer hover:shadow-md hover:scale-[1.02] transition-all">
-                        <span class="text-weddingRed text-lg"><i class="fa-solid fa-gopuram"></i></span>
-                        <h4 class="font-royal text-xs font-bold text-weddingRed tracking-wider mt-2">The Muhurtham</h4>
-                        <p class="text-[11px] text-gray-500 mt-1">August 27, 2026</p>
-                        <span class="text-[9px] text-weddingRed font-semibold mt-2 block uppercase">View Venue →</span>
-                    </div>
-                    <div onclick="switchTab('reception')" class="bg-white border-[#D2DAE8] border p-4 rounded-2xl shadow-sm text-center cursor-pointer hover:shadow-md hover:scale-[1.02] transition-all">
-                        <span class="text-[#2E3D62] text-lg"><i class="fa-solid fa-champagne-glasses"></i></span>
-                        <h4 class="font-royal text-xs font-bold text-[#2E3D62] tracking-wider mt-2">The Reception</h4>
-                        <p class="text-[11px] text-gray-500 mt-1">August 29, 2026</p>
-                        <span class="text-[9px] text-[#2E3D62] font-semibold mt-2 block uppercase">View Venue →</span>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Interactive Mini Game Element -->
-            <div class="royal-card rounded-3xl p-6 sm:p-8 max-w-xl mx-auto bg-white/95 shadow-xl text-center">
-                <span class="text-3xl text-weddingGold mb-3 block"><i class="fa-solid fa-gamepad pulse-heart"></i></span>
+        <!-- Relationship Trivia Game -->
+        <section class="max-w-xl mx-auto">
+            <div class="royal-card rounded-3xl p-6 sm:p-8 bg-white/95 shadow-xl text-center">
+                <span class="text-3xl text-weddingGold mb-3 block"><i class="fa-solid fa-heart-pulse pulse-heart"></i></span>
                 <h3 class="font-royal text-weddingRed text-lg sm:text-xl font-bold tracking-wider mb-2">How Well Do You Know Us?</h3>
-                <p class="font-serifHeading italic text-gray-600 text-xs sm:text-sm mb-6">Take this cute little challenge to unlock a custom secret memory!</p>
+                <p class="font-serifHeading italic text-gray-600 text-xs sm:text-sm mb-6">Take this quick question challenge to unlock a custom secret memory!</p>
 
+                <!-- Stage 1: Who do you know best -->
                 <div id="gameStep1" class="space-y-4">
                     <p class="text-sm font-semibold mb-4 text-[#8B6E32]">Who do you know best from the couple?</p>
                     <div class="grid grid-cols-3 gap-3">
@@ -308,6 +260,7 @@
                     </div>
                 </div>
 
+                <!-- Stage 2: Knowledge Duration -->
                 <div id="gameStep2" class="hidden space-y-4">
                     <p id="timeQuestion" class="text-sm font-semibold mb-4 text-[#8B6E32]">For how many years do you know them?</p>
                     <div class="grid grid-cols-2 gap-3">
@@ -326,20 +279,89 @@
                     </div>
                 </div>
 
+                <!-- Stage 3: Facts Output -->
                 <div id="gameResult" class="hidden space-y-4">
                     <div class="bg-[#FAF7F2] border border-weddingGold/20 rounded-2xl p-4 sm:p-6 text-center max-w-sm mx-auto">
                         <span class="text-3xl">✨</span>
-                        <p id="resultText" class="text-xs sm:text-sm text-gray-700 leading-relaxed italic mt-2 font-medium">Interesting Fact placeholder...</p>
+                        <p id="resultText" class="text-xs sm:text-sm text-gray-700 leading-relaxed italic mt-2 font-medium">Fact goes here...</p>
                     </div>
                     <button onclick="restartGame()" class="text-xs text-weddingRed hover:text-weddingGold font-bold tracking-wider underline block mx-auto">Play Again!</button>
                 </div>
             </div>
         </section>
 
-        <!-- ================= ENGAGEMENT TAB ================= -->
-        <section id="tab-engagement" class="tab-content space-y-6">
-            <div class="text-center max-w-xl mx-auto bg-[#FFF5F6] p-6 sm:p-10 rounded-3xl border border-[#F0D5D9] shadow-md relative overflow-hidden">
-                <div class="absolute -top-10 -right-10 w-32 h-32 bg-[#E1ADB5]/20 rounded-full blur-2xl"></div>
+        <!-- Interactive 4-Card Invitation Gate -->
+        <section class="space-y-8">
+            <div class="text-center">
+                <h3 class="font-royal text-weddingRed text-3xl font-bold tracking-wider mb-2">The Golden Invitations</h3>
+                <p class="font-serifHeading italic text-weddingGold text-base mb-2">Tap any wax-sealed envelope to open its details & soundscape</p>
+                <div class="w-16 h-[2px] bg-weddingGold mx-auto my-3"></div>
+            </div>
+
+            <!-- Responsive 2x2 or Stack Grid of Cards -->
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-3xl mx-auto">
+                
+                <!-- CARD 1: ENGAGEMENT -->
+                <div onclick="openEvent('engagement')" class="group cursor-pointer relative rounded-2xl overflow-hidden shadow-lg border-2 border-weddingGold transition-all duration-300 hover:scale-105 bg-gradient-to-b from-[#FFF5F6] to-[#FFE1E5] p-6 text-center flex flex-col justify-between items-center h-64">
+                    <div class="text-[#C15C6C] text-3xl mt-4"><i class="fa-solid fa-ring pulse-heart"></i></div>
+                    <div>
+                        <h4 class="font-royal text-lg font-bold text-weddingRed tracking-wider">The Engagement</h4>
+                        <span class="text-[10px] font-semibold text-[#C15C6C] uppercase tracking-[0.2em] block mt-1">Narsingi, Hyderabad</span>
+                    </div>
+                    <!-- Wax Seal Button visual indicator -->
+                    <div class="wax-seal-btn w-12 h-12 rounded-full flex items-center justify-center text-weddingGold font-bold text-xs">
+                        <i class="fa-solid fa-envelope-open"></i>
+                    </div>
+                </div>
+
+                <!-- CARD 2: HALDI & SANGEET -->
+                <div onclick="openEvent('haldi')" class="group cursor-pointer relative rounded-2xl overflow-hidden shadow-lg border-2 border-weddingGold transition-all duration-300 hover:scale-105 bg-gradient-to-b from-[#FFFDF0] to-[#FFF8D2] p-6 text-center flex flex-col justify-between items-center h-64">
+                    <div class="text-[#D49B00] text-3xl mt-4"><i class="fa-solid fa-wand-magic-sparkles pulse-heart"></i></div>
+                    <div>
+                        <h4 class="font-royal text-lg font-bold text-[#7A5A00] tracking-wider">Haldi & Sangeet</h4>
+                        <span class="text-[10px] font-semibold text-[#D49B00] uppercase tracking-[0.2em] block mt-1">Moinabad, Hyderabad</span>
+                    </div>
+                    <div class="wax-seal-btn w-12 h-12 rounded-full flex items-center justify-center text-weddingGold font-bold text-xs">
+                        <i class="fa-solid fa-envelope-open"></i>
+                    </div>
+                </div>
+
+                <!-- CARD 3: WEDDING -->
+                <div onclick="openEvent('wedding')" class="group cursor-pointer relative rounded-2xl overflow-hidden shadow-lg border-2 border-weddingGold transition-all duration-300 hover:scale-105 bg-gradient-to-b from-[#FAF3F4] to-[#F1D6DA] p-6 text-center flex flex-col justify-between items-center h-64">
+                    <div class="text-weddingRed text-3xl mt-4"><i class="fa-solid fa-gopuram pulse-heart"></i></div>
+                    <div>
+                        <h4 class="font-royal text-lg font-bold text-weddingRed tracking-wider">The Wedding</h4>
+                        <span class="text-[10px] font-semibold text-weddingGold uppercase tracking-[0.2em] block mt-1">Turkayamjal, Hyderabad</span>
+                    </div>
+                    <div class="wax-seal-btn w-12 h-12 rounded-full flex items-center justify-center text-weddingGold font-bold text-xs">
+                        <i class="fa-solid fa-envelope-open"></i>
+                    </div>
+                </div>
+
+                <!-- CARD 4: RECEPTION -->
+                <div onclick="openEvent('reception')" class="group cursor-pointer relative rounded-2xl overflow-hidden shadow-lg border-2 border-weddingGold transition-all duration-300 hover:scale-105 bg-gradient-to-b from-[#F3F4FB] to-[#DDE2F2] p-6 text-center flex flex-col justify-between items-center h-64">
+                    <div class="text-[#2E3D62] text-3xl mt-4"><i class="fa-solid fa-champagne-glasses pulse-heart"></i></div>
+                    <div>
+                        <h4 class="font-royal text-lg font-bold text-[#2E3D62] tracking-wider">The Reception</h4>
+                        <span class="text-[10px] font-semibold text-[#6F82A5] uppercase tracking-[0.2em] block mt-1">Mahabubabad</span>
+                    </div>
+                    <div class="wax-seal-btn w-12 h-12 rounded-full flex items-center justify-center text-weddingGold font-bold text-xs">
+                        <i class="fa-solid fa-envelope-open"></i>
+                    </div>
+                </div>
+
+            </div>
+        </section>
+
+    </main>
+
+    <!-- OVERLAYS: MODAL BOXES FOR SELECTIVE EVENTS DISPLAY -->
+    
+    <!-- MODAL 1: ENGAGEMENT -->
+    <div id="modal-engagement" class="fixed inset-0 z-[110] flex items-center justify-center p-4 bg-black/60 backdrop-blur-sm modal-inactive transition-all duration-500">
+        <div class="royal-card w-full max-w-md rounded-3xl p-6 sm:p-10 bg-white/95 border-weddingGold relative overflow-hidden">
+            <button onclick="closeEvent()" class="absolute top-4 right-4 text-gray-500 hover:text-weddingRed transition-colors text-lg"><i class="fa-solid fa-xmark"></i></button>
+            <div class="text-center">
                 <div class="text-[#C15C6C] text-4xl mb-4"><i class="fa-solid fa-ring pulse-heart"></i></div>
                 <h3 class="font-royal text-2xl font-bold text-weddingRed tracking-wider">The Engagement</h3>
                 <span class="text-xs font-semibold text-[#C15C6C] uppercase tracking-[0.2em] block mt-1">Theme: Floral Romance & Pastel Pink</span>
@@ -355,16 +377,18 @@
                     "Two hearts bound in promise, stepping together toward forever. Celebrate with us amid a garden-themed ambiance filled with pink cherry blossoms and floral warmth!"
                 </p>
 
-                <a href="https://maps.google.com/?cid=5534935847754850063" target="_blank" class="bg-gradient-to-r from-[#C15C6C] to-[#E1ADB5] text-white py-3 px-8 rounded-full font-bold text-xs tracking-wider inline-flex items-center justify-center gap-2 hover:opacity-95 shadow-md transform active:scale-95 transition-all">
+                <a href="https://maps.google.com/?cid=5534935847754850063" target="_blank" class="bg-gradient-to-r from-[#C15C6C] to-[#E1ADB5] text-white py-3 px-8 rounded-full font-bold text-xs tracking-wider inline-flex items-center justify-center gap-2 hover:opacity-95 shadow-md transform active:scale-95 transition-all w-full sm:w-auto">
                     <i class="fa-solid fa-map-location-dot"></i> Open Google Maps Route
                 </a>
             </div>
-        </section>
+        </div>
+    </div>
 
-        <!-- ================= HALDI & SANGEET TAB ================= -->
-        <section id="tab-haldi" class="tab-content space-y-6">
-            <div class="text-center max-w-xl mx-auto bg-[#FFFDF0] p-6 sm:p-10 rounded-3xl border border-[#FFF1C2] shadow-md relative overflow-hidden">
-                <div class="absolute -top-10 -right-10 w-32 h-32 bg-[#FFDF74]/20 rounded-full blur-2xl"></div>
+    <!-- MODAL 2: HALDI -->
+    <div id="modal-haldi" class="fixed inset-0 z-[110] flex items-center justify-center p-4 bg-black/60 backdrop-blur-sm modal-inactive transition-all duration-500">
+        <div class="royal-card w-full max-w-md rounded-3xl p-6 sm:p-10 bg-white/95 border-weddingGold relative overflow-hidden">
+            <button onclick="closeEvent()" class="absolute top-4 right-4 text-gray-500 hover:text-weddingRed transition-colors text-lg"><i class="fa-solid fa-xmark"></i></button>
+            <div class="text-center">
                 <div class="text-[#D49B00] text-4xl mb-4"><i class="fa-solid fa-wand-magic-sparkles pulse-heart"></i></div>
                 <h3 class="font-royal text-2xl font-bold text-[#7A5A00] tracking-wider">Haldi & Sangeet</h3>
                 <span class="text-xs font-semibold text-[#D49B00] uppercase tracking-[0.2em] block mt-1">Theme: Marigold Yellow & Festive Beats</span>
@@ -380,16 +404,18 @@
                     "Let's splash some turmeric color and dance the night away! A sun-kissed theme filled with blooming marigolds, local dhol music, and high-energy celebration."
                 </p>
 
-                <a href="https://maps.google.com/?cid=12426258192851929551" target="_blank" class="bg-gradient-to-r from-[#D49B00] to-[#FFC72C] text-white py-3 px-8 rounded-full font-bold text-xs tracking-wider inline-flex items-center justify-center gap-2 hover:opacity-95 shadow-md transform active:scale-95 transition-all">
+                <a href="https://maps.google.com/?cid=12426258192851929551" target="_blank" class="bg-gradient-to-r from-[#D49B00] to-[#FFC72C] text-white py-3 px-8 rounded-full font-bold text-xs tracking-wider inline-flex items-center justify-center gap-2 hover:opacity-95 shadow-md transform active:scale-95 transition-all w-full sm:w-auto">
                     <i class="fa-solid fa-map-location-dot"></i> Open Google Maps Route
                 </a>
             </div>
-        </section>
+        </div>
+    </div>
 
-        <!-- ================= WEDDING TAB ================= -->
-        <section id="tab-wedding" class="tab-content space-y-6">
-            <div class="text-center max-w-xl mx-auto bg-[#FAF3F4] p-6 sm:p-10 rounded-3xl border border-[#F0D5D9] shadow-md relative overflow-hidden">
-                <div class="absolute -top-10 -right-10 w-32 h-32 bg-[#7A1C2C]/10 rounded-full blur-2xl"></div>
+    <!-- MODAL 3: WEDDING -->
+    <div id="modal-wedding" class="fixed inset-0 z-[110] flex items-center justify-center p-4 bg-black/60 backdrop-blur-sm modal-inactive transition-all duration-500">
+        <div class="royal-card w-full max-w-md rounded-3xl p-6 sm:p-10 bg-white/95 border-weddingGold relative overflow-hidden">
+            <button onclick="closeEvent()" class="absolute top-4 right-4 text-gray-500 hover:text-weddingRed transition-colors text-lg"><i class="fa-solid fa-xmark"></i></button>
+            <div class="text-center">
                 <div class="text-weddingRed text-4xl mb-4"><i class="fa-solid fa-gopuram pulse-heart"></i></div>
                 <h3 class="font-royal text-2xl font-bold text-weddingRed tracking-wider">The Wedding (Muhurtham)</h3>
                 <span class="text-xs font-semibold text-weddingGold uppercase tracking-[0.2em] block mt-1">Theme: Traditional Kumkum Red & Royal Gold</span>
@@ -405,16 +431,18 @@
                     "The sacred moment when two paths converge forever. A classic royal setup filled with red roses, traditional shehnai, and warm festive hospitality."
                 </p>
 
-                <a href="https://maps.google.com/?cid=1224196098378392077" target="_blank" class="bg-gradient-to-r from-weddingRed to-weddingGold text-white py-3 px-8 rounded-full font-bold text-xs tracking-wider inline-flex items-center justify-center gap-2 hover:opacity-95 shadow-md transform active:scale-95 transition-all">
+                <a href="https://maps.google.com/?cid=1224196098378392077" target="_blank" class="bg-gradient-to-r from-weddingRed to-weddingGold text-white py-3 px-8 rounded-full font-bold text-xs tracking-wider inline-flex items-center justify-center gap-2 hover:opacity-95 shadow-md transform active:scale-95 transition-all w-full sm:w-auto">
                     <i class="fa-solid fa-map-location-dot"></i> Open Google Maps Route
                 </a>
             </div>
-        </section>
+        </div>
+    </div>
 
-        <!-- ================= RECEPTION TAB ================= -->
-        <section id="tab-reception" class="tab-content space-y-6">
-            <div class="text-center max-w-xl mx-auto bg-[#F3F4FB] p-6 sm:p-10 rounded-3xl border border-[#D2DAE8] shadow-md relative overflow-hidden">
-                <div class="absolute -top-10 -right-10 w-32 h-32 bg-[#2E3D62]/10 rounded-full blur-2xl"></div>
+    <!-- MODAL 4: RECEPTION -->
+    <div id="modal-reception" class="fixed inset-0 z-[110] flex items-center justify-center p-4 bg-black/60 backdrop-blur-sm modal-inactive transition-all duration-500">
+        <div class="royal-card w-full max-w-md rounded-3xl p-6 sm:p-10 bg-white/95 border-weddingGold relative overflow-hidden">
+            <button onclick="closeEvent()" class="absolute top-4 right-4 text-gray-500 hover:text-weddingRed transition-colors text-lg"><i class="fa-solid fa-xmark"></i></button>
+            <div class="text-center">
                 <div class="text-[#2E3D62] text-4xl mb-4"><i class="fa-solid fa-champagne-glasses pulse-heart"></i></div>
                 <h3 class="font-royal text-2xl font-bold text-[#2E3D62] tracking-wider">The Reception</h3>
                 <span class="text-xs font-semibold text-[#6F82A5] uppercase tracking-[0.2em] block mt-1">Theme: Evening Twilight Blue & Champagne Gold</span>
@@ -430,15 +458,14 @@
                     "Let us wrap up our wedding celebrations in grand fashion with high-end food, musical notes, and gorgeous modern twilight decorations!"
                 </p>
 
-                <a href="https://maps.google.com/?cid=16530344812734595952" target="_blank" class="bg-gradient-to-r from-[#2E3D62] to-[#5C709E] text-white py-3 px-8 rounded-full font-bold text-xs tracking-wider inline-flex items-center justify-center gap-2 hover:opacity-95 shadow-md transform active:scale-95 transition-all">
+                <a href="https://maps.google.com/?cid=16530344812734595952" target="_blank" class="bg-gradient-to-r from-[#2E3D62] to-[#5C709E] text-white py-3 px-8 rounded-full font-bold text-xs tracking-wider inline-flex items-center justify-center gap-2 hover:opacity-95 shadow-md transform active:scale-95 transition-all w-full sm:w-auto">
                     <i class="fa-solid fa-map-location-dot"></i> Open Google Maps Route
                 </a>
             </div>
-        </section>
+        </div>
+    </div>
 
-    </main>
-
-    <!-- RSVP Form -->
+    <!-- RSVP Section -->
     <section class="py-12 bg-[#F6ECEE] border-t-2 border-b-2 border-weddingGold px-4 relative z-20">
         <div class="max-w-md mx-auto text-center">
             <h3 class="font-royal text-weddingRed text-xl sm:text-2xl font-bold tracking-widest mb-2">Are You Coming?</h3>
@@ -471,19 +498,18 @@
     <section class="py-16 px-4 bg-[#FFFDF9] text-center relative z-20">
         <div class="max-w-xl mx-auto royal-card rounded-3xl p-8 sm:p-12">
             <div class="text-weddingGold text-4xl mb-4"><i class="fa-solid fa-camera pulse-heart"></i></div>
-            <h3 class="font-royal text-weddingRed text-xl sm:text-2xl font-bold tracking-widest mb-3">Our Celebration Album</h3>
+            <h3 class="font-royal text-weddingRed text-xl sm:text-2xl font-bold tracking-widest mb-3">Share Your Clicks!</h3>
             <p class="font-serifHeading italic text-[#8B6E32] text-xs sm:text-sm max-w-md mx-auto mb-6">
                 Be our memory keeper! Share high-resolution photos, selfies, and videos captured by you across all celebrations of our #SUPERHIT love story.
             </p>
             
             <div class="bg-[#FAF2F3] border border-dashed border-[#C49B30]/50 rounded-2xl p-6 mb-6">
                 <i class="fa-solid fa-cloud-arrow-up text-3xl text-weddingRed mb-2 block"></i>
-                <span class="text-[11px] text-gray-500 block">Help us construct our dream memory book! Click below to send your captures.</span>
+                <span class="text-[11px] text-gray-500 block">Help us construct our dream memory book! Click below to add your captures to our shared album.</span>
             </div>
             
-            <!-- Replace the link below with your specific Google Photos Album Link when ready! -->
             <a href="https://photos.google.com" target="_blank" class="bg-gradient-to-r from-weddingRed to-weddingGold text-white py-3.5 px-8 rounded-full font-bold text-xs tracking-widest uppercase shadow-lg inline-flex items-center gap-2 hover:scale-105 active:scale-95 transform transition-all">
-                <i class="fa-solid fa-images"></i> Upload Your Clicks Here
+                <i class="fa-solid fa-images"></i> Upload Your Photos Here
             </a>
         </div>
     </section>
@@ -501,19 +527,32 @@
         <p class="text-[10px] text-gray-400 tracking-wider">Lovingly crafted with celebration motifs for Supraja & Rohith.</p>
     </footer>
 
-    <!-- Interactive Scripts & State Machinery -->
     <script>
-        // 1. Audio AutoPlay Fix & Visibility Tab State Tracking
+        // 1. Audio Playback Control & Autoplay Bypass
         const player = document.getElementById('weddingMusic');
         const enterBtn = document.getElementById('enterBtn');
         const entryModal = document.getElementById('entryModal');
         const playBtn = document.getElementById('musicToggle');
         const playIcon = document.getElementById('musicIcon');
+        const sourceElement = document.getElementById('audioSource');
+        const nowPlayingBadge = document.getElementById('nowPlayingBadge');
+        const nowPlayingText = document.getElementById('nowPlayingText');
         
         let musicActive = false;
         let wasPlayingBeforeBackground = false;
+        
+        // Define elegant royalty-free loops representing the events
+        const tracks = {
+            ambient: { url: 'https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3', name: 'Ambient Sitar & Flute' },
+            engagement: { url: 'https://www.soundhelix.com/examples/mp3/SoundHelix-Song-3.mp3', name: 'Elegant Piano & Sitar' },
+            haldi: { url: 'https://www.soundhelix.com/examples/mp3/SoundHelix-Song-6.mp3', name: 'Celebratory Sangeet Beats' },
+            wedding: { url: 'https://www.soundhelix.com/examples/mp3/SoundHelix-Song-8.mp3', name: 'Auspicious Wedding Shehnai' },
+            reception: { url: 'https://www.soundhelix.com/examples/mp3/SoundHelix-Song-4.mp3', name: 'Grand Twilight Violin' }
+        };
 
-        // Auto-play action upon user tapping to "Enter Invitation"
+        let currentTrackUrl = tracks.ambient.url;
+
+        // Auto-play action upon click
         enterBtn.addEventListener('click', function() {
             entryModal.style.transition = 'opacity 0.6s ease';
             entryModal.style.opacity = '0';
@@ -521,16 +560,16 @@
                 entryModal.style.display = 'none';
             }, 600);
 
-            // Trigger Shehnai play on interaction
             player.play().then(() => {
                 musicActive = true;
                 updateAudioIcon();
+                showNowPlayingBadge(tracks.ambient.name);
             }).catch(err => {
                 console.log("Audio block active: ", err);
             });
         });
 
-        // Background Visibility state listener
+        // Tab focus detection to mute audio
         document.addEventListener('visibilitychange', function() {
             if (document.hidden) {
                 if (musicActive && !player.paused) {
@@ -546,7 +585,7 @@
             }
         });
 
-        // Floating Audio Toggle Button
+        // Floating controls
         playBtn.addEventListener('click', function() {
             if (player.paused) {
                 player.play();
@@ -562,41 +601,82 @@
             if (player.paused) {
                 playIcon.classList.remove('fa-pause');
                 playIcon.classList.add('fa-music');
+                nowPlayingBadge.classList.add('opacity-0', 'translate-y-2');
             } else {
                 playIcon.classList.remove('fa-music');
                 playIcon.classList.add('fa-pause');
+                nowPlayingBadge.classList.remove('opacity-0', 'translate-y-2');
             }
         }
 
-        // 2. Tab Switching Engine with Custom Color Themes & Petal Shifts
-        let activeTabName = 'home';
-        function switchTab(tabId) {
-            // Remove active markers on tab items
-            document.querySelectorAll('.nav-tab').forEach(btn => {
-                btn.classList.remove('bg-weddingRed', 'text-white');
-                btn.classList.add('text-[#888]');
-            });
-            
-            // Apply high-contrast marker to targeted tab
-            const targetBtn = document.getElementById(`btn-${tabId}`);
-            if (targetBtn) {
-                targetBtn.classList.remove('text-[#888]');
-                targetBtn.classList.add('bg-weddingRed', 'text-white');
+        function showNowPlayingBadge(trackName) {
+            if (musicActive && !player.paused) {
+                nowPlayingText.innerText = `Playing: ${trackName}`;
+                nowPlayingBadge.classList.remove('opacity-0', 'translate-y-2');
             }
-
-            // Slide display panels
-            document.querySelectorAll('.tab-content').forEach(section => {
-                section.classList.remove('active');
-            });
-            document.getElementById(`tab-${tabId}`).classList.add('active');
-            
-            activeTabName = tabId;
-
-            // Scroll gently up to the tabs
-            document.querySelector('nav').scrollIntoView({ behavior: 'smooth', block: 'start' });
         }
 
-        // 3. Muhurtham Live Countdown Engine
+        // Crossfade Dynamic Audio Routing
+        function switchMusic(trackKey) {
+            if (!musicActive) return;
+            const target = tracks[trackKey];
+            if (target.url === currentTrackUrl) return;
+
+            currentTrackUrl = target.url;
+            
+            // Fade out smoothly
+            let fadeOut = setInterval(() => {
+                if (player.volume > 0.1) {
+                    player.volume -= 0.1;
+                } else {
+                    clearInterval(fadeOut);
+                    player.pause();
+                    sourceElement.src = target.url;
+                    player.load();
+                    player.volume = 1.0;
+                    player.play().then(() => {
+                        showNowPlayingBadge(target.name);
+                    }).catch(err => console.log(err));
+                }
+            }, 40);
+        }
+
+        // 2. Interactive Invitation Card Overlays (Modals)
+        let activeTheme = 'ambient';
+
+        function openEvent(eventKey) {
+            // Hide any other active overlay
+            closeEvent();
+
+            // Select overlay element
+            const modal = document.getElementById(`modal-${eventKey}`);
+            if (modal) {
+                modal.classList.remove('modal-inactive');
+                modal.classList.add('modal-active');
+            }
+
+            // Adjust theme for falling petal particle generation
+            activeTheme = eventKey;
+
+            // Route dynamic audio
+            switchMusic(eventKey);
+        }
+
+        function closeEvent() {
+            // Deactivate all overlay panels
+            document.querySelectorAll('[id^="modal-"]').forEach(modal => {
+                modal.classList.remove('modal-active');
+                modal.classList.add('modal-inactive');
+            });
+
+            // Revert theme context
+            activeTheme = 'ambient';
+
+            // Return music safely to ambient track
+            switchMusic('ambient');
+        }
+
+        // 3. Live Countdown Timer Setup
         const weddingDate = new Date("Aug 27, 2026 11:20:00").getTime();
 
         const timerFunc = setInterval(function() {
@@ -623,7 +703,7 @@
             }
         }, 1000);
 
-        // 4. RSVP dispatch mechanism
+        // 4. RSVP Submission Logic
         document.getElementById('rsvpForm').addEventListener('submit', function(e) {
             e.preventDefault();
             const name = document.getElementById('guestName').value;
@@ -635,11 +715,11 @@
             window.open(`https://api.whatsapp.com/send?text=${formattedMsg}`, '_blank');
         });
 
-        // 5. Social Sharing Engine
+        // 5. Social Sharing trigger
         function shareInvite() {
             const shareData = {
                 title: "Supraja & Rohith's Wedding Invitation",
-                text: "🌸 We are getting married! Click to view our official interactive schedule, count down timer, and location maps. Join us on our special journey of #SUPERHIT! 👇",
+                text: "🌸 We are getting married! Click to view our official interactive schedule, countdown timer, and location maps. Join us on our special journey of #SUPERHIT! 👇",
                 url: window.location.href
             };
 
@@ -650,7 +730,7 @@
             }
         }
 
-        // 6. Interactive Game Engine (How Well Do You Know Us?)
+        // 6. Relationship Trivia Game Engine
         let selectedPerson = '';
         let selectedTime = '';
 
@@ -659,7 +739,6 @@
             document.getElementById('gameStep1').classList.add('hidden');
             document.getElementById('gameStep2').classList.remove('hidden');
             
-            // Adjust question dynamically
             const timeQuestion = document.getElementById('timeQuestion');
             if (person === 'supraja') {
                 timeQuestion.innerHTML = "How long have you known Supraja?";
@@ -680,27 +759,27 @@
 
             if (selectedPerson === 'both') {
                 if (timeOption === 'child') {
-                    fact = "Wow! You've watched their stories unfold since childhood! Did you know that they both used to hide their sweets from everyone, but now they share their whole lives with each other? You definitely need to bring some embarrassing childhood photos to the Sangeet! 😉";
+                    fact = "Wow! You've watched their stories unfold since childhood! Did you know that they both used to hide sweets from everyone, but now they share their whole lives? Bring some embarrassing childhood photos to the Sangeet! 😉";
                 } else if (timeOption === 'college') {
-                    fact = "A classic! College/work friends hold all the best stories. When their worlds merged, everyone around them immediately knew they were a #SUPERHIT pair before they even admitted it. Get ready to rock the dance floor at Nandana Gardens!";
+                    fact = "A classic! College/work friends hold the best stories. When their worlds merged, everyone around them immediately knew they were a #SUPERHIT pair. Get ready to rock the dance floor!";
                 } else if (timeOption === 'few_years') {
-                    fact = "You've been a major support system for them over the last few years! You've seen them laugh, scheme, and decide on forever. Make sure to claim your spot in the selfie queue first!";
+                    fact = "You've been a major support system for them over the last few years! You've seen them laugh, scheme, and decide on forever. Make sure to claim your spot in the selfie queue!";
                 } else {
-                    fact = "Even though you met them recently, you've quickly become a special part of their circle. A love story this sweet brings positive vibes to everyone nearby. Welcome to the celebration!";
+                    fact = "Even though you met them recently, you've quickly become a special part of their circle. A love story this sweet brings positive vibes to everyone. Welcome to the celebration!";
                 }
             } else if (selectedPerson === 'supraja') {
                 if (timeOption === 'child') {
-                    fact = "You've known Supraja since her braid-and-laughter days! She was always a star, but wait till you see her walk in as a bride under the gold flower canopy at Parinaya Conventions. Keep those tissues handy! 🥹";
+                    fact = "You've known Supraja since her braid-and-laughter days! She was always a star, but wait till you see her walk in under the gold flower canopy at Parinaya Conventions. Keep those tissues handy! 🥹";
                 } else if (timeOption === 'college') {
                     fact = "You survived classes and professional grinds together with Supraja. You know her ambitious side—and how Rohith makes her smile instantly. Let's raise a toast to her new journey!";
                 } else if (timeOption === 'few_years') {
-                    fact = "Over the past few years, you've shared key life milestones with Supraja. You've heard all about her coffee thoughts, plans, and her absolute excitement about Rohith. Let's make this day unforgettable!";
+                    fact = "Over the past few years, you've shared key life milestones with Supraja. You've heard all about her coffee thoughts and her absolute excitement about Rohith. Let's make this day unforgettable!";
                 } else {
                     fact = "Whether new or old, friends are diamonds. Supraja is thrilled to have you bless her wedding. Make sure to meet her near the stage!";
                 }
             } else { // Rohith
                 if (timeOption === 'child') {
-                    fact = "Ah! You know all of Rohith's secrets from back in the day. He used to say he would never get married, but look at him now! He only has eyes for Supraja. Remember to roast him during the Sangeet! 😂";
+                    fact = "Ah! You know all of Rohith's secrets from back in the day. He used to say he would never get married, but look at him now! He only has eyes for Supraja. Remember to roast him during Sangeet! 😂";
                 } else if (timeOption === 'college') {
                     fact = "College or work partner in crime! You've seen Rohith pull off crazy assignments and late-night shifts. Now watch him pull off the most important task of all: being a premium husband!";
                 } else if (timeOption === 'few_years') {
@@ -720,7 +799,7 @@
             document.getElementById('gameStep1').classList.remove('hidden');
         }
 
-        // 7. Traditional Marigold & Rose Petals Falling Animation Loop
+        // 7. Foreground Photorealistic Petal Shower Canvas Loop
         const canvas = document.getElementById('petalCanvas');
         const ctx = canvas.getContext('2d');
 
@@ -731,7 +810,7 @@
         window.addEventListener('resize', resizeCanvas);
         resizeCanvas();
 
-        const maxPetals = 20;
+        const maxPetals = 22;
         const petals = [];
 
         class FloralPetal {
@@ -755,16 +834,16 @@
                 this.speedY = Math.random() * 1.5 + 0.8;
                 this.speedX = Math.random() * 1 - 0.5;
                 
-                // Adjust colors and particle types based on currently selected tab theme
-                if (activeTabName === 'haldi') {
+                // Adjust colors and particle types based on currently scroll-spied active section theme
+                if (activeTheme === 'haldi') {
                     // Haldi Ceremony gets pure bright yellow and warm orange marigolds
                     this.color = Math.random() > 0.5 ? '#FFD400' : '#FFA200';
                     this.shape = 'marigold';
-                } else if (activeTabName === 'engagement') {
+                } else if (activeTheme === 'engagement') {
                     // Engagement gets soft pink rose petals and light peach blossoms
                     this.color = Math.random() > 0.5 ? '#FFB5C2' : '#FFE1E7';
                     this.shape = 'rose';
-                } else if (activeTabName === 'reception') {
+                } else if (activeTheme === 'reception') {
                     // Reception gets golden circular or rectangular glitter pieces
                     this.color = Math.random() > 0.5 ? '#D4AF37' : '#FFF9D4';
                     this.shape = 'glitter';
