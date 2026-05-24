@@ -6,6 +6,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Supraja & Rohith's Wedding Celebration</title>
 
+    <!-- Favicon -->
+    <link rel="icon"
+        href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🌸</text></svg>">
+
     <!-- Premium Fonts & Icons -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -131,44 +135,7 @@
 
 <body class="font-sansBody text-charcoal relative overflow-x-hidden pb-24 md:pb-8">
 
-    <!-- GLOBAL INLINE SVG DEFINITION BLOCK (Guarantees logo renders instantly everywhere) -->
-    <svg xmlns="http://www.w3.org/2000/svg" style="position: absolute; width: 0; height: 0; overflow: hidden;">
-        <defs>
-            <linearGradient id="goldGradient" x1="0%" y1="0%" x2="100%" y2="100%">
-                <stop offset="0%" stop-color="#F5D061" />
-                <stop offset="30%" stop-color="#FFF3CD" />
-                <stop offset="70%" stop-color="#D4AF37" />
-                <stop offset="100%" stop-color="#AA7C11" />
-            </linearGradient>
 
-            <g id="rs-monogram">
-                <!-- Circular background shield -->
-                <circle cx="60" cy="60" r="52" fill="none" stroke="url(#goldGradient)" stroke-width="1.5"
-                    stroke-dasharray="4 4" opacity="0.6" />
-                <circle cx="60" cy="60" r="47" fill="none" stroke="url(#goldGradient)" stroke-width="0.7"
-                    opacity="0.4" />
-
-                <!-- R Character - Stylized Left upright curve -->
-                <path d="M 32,75 C 32,55 35,40 32,25 C 34,25 45,20 52,27 C 58,33 55,43 45,46 C 38,48 32,46 32,46"
-                    fill="none" stroke="url(#goldGradient)" stroke-width="5" stroke-linecap="round"
-                    stroke-linejoin="round" />
-
-                <!-- Central Fluid Wave Swoosh joining R and S -->
-                <path
-                    d="M 18,58 C 30,52 42,46 45,46 C 49,46 55,54 59,62 C 64,72 72,78 82,72 C 92,66 92,54 85,48 C 78,42 68,46 66,54 C 64,62 70,70 80,68"
-                    fill="none" stroke="url(#goldGradient)" stroke-width="5.5" stroke-linecap="round"
-                    stroke-linejoin="round" />
-
-                <!-- S Character - Top elegant loop -->
-                <path d="M 88,28 C 80,24 70,28 72,36 C 74,42 80,44 85,48" fill="none" stroke="url(#goldGradient)"
-                    stroke-width="5" stroke-linecap="round" stroke-linejoin="round" />
-
-                <!-- Underneath decorative wave arcs for the "water wave" design -->
-                <path d="M 25,82 C 40,74 50,86 65,78 C 80,70 90,82 105,74" fill="none" stroke="url(#goldGradient)"
-                    stroke-width="2.5" stroke-linecap="round" opacity="0.8" />
-            </g>
-        </defs>
-    </svg>
 
     <!-- Foreground Petal Shower Canvas -->
     <canvas id="petalCanvas"></canvas>
@@ -942,15 +909,51 @@
         }, 1000);
 
         // 4. RSVP Submission Logic
+        const attendanceSelect = document.getElementById('attendance');
+        const guestCountSelect = document.getElementById('guestCount');
+
+        // Dynamically disable/dim guest count if not attending
+        attendanceSelect.addEventListener('change', function () {
+            if (attendanceSelect.value === 'No') {
+                guestCountSelect.disabled = true;
+                guestCountSelect.classList.add('opacity-50', 'cursor-not-allowed', 'bg-gray-100');
+            } else {
+                guestCountSelect.disabled = false;
+                guestCountSelect.classList.remove('opacity-50', 'cursor-not-allowed', 'bg-gray-100');
+            }
+        });
+
         document.getElementById('rsvpForm').addEventListener('submit', function (e) {
             e.preventDefault();
             const name = document.getElementById('guestName').value;
-            const attend = document.getElementById('attendance').value;
-            const size = document.getElementById('guestCount').value;
+            const attend = attendanceSelect.value;
+            const size = guestCountSelect.value;
 
-            const message = `Hi Supraja & Rohith! 🌸\nI have RSVP'd for your wedding! Here are my details:\n\n👤 Name: ${name}\n💌 Attending: ${attend}\n👥 Guests: ${size}\n\nSuper excited for the #SUPERHIT wedding! 🎉✨`;
+            // Tailor the WhatsApp message depending on attendance status
+            let message = '';
+            if (attend === 'No') {
+                message = `Hi Supraja & Rohith! 🌸\nI have RSVP'd for your wedding. Sadly, I cannot attend, but I send you both my warmest blessings, prayers, and love for your beautiful journey ahead! 💕✨`;
+            } else {
+                message = `Hi Supraja & Rohith! 🌸\nI have RSVP'd for your wedding! Here are my details:\n\n👤 Name: ${name}\n💌 Attending: ${attend}\n👥 Guests: ${size}\n\nSuper excited for the #SUPERHIT wedding! 🎉✨`;
+            }
             const formattedMsg = encodeURIComponent(message);
-            window.open(`https://api.whatsapp.com/send?phone=919866610373&text=${formattedMsg}`, '_blank');
+
+            // Show RSVP Preparation Toast
+            const toast = document.getElementById('rsvpToast');
+            if (toast) {
+                toast.classList.remove('opacity-0', 'translate-y-4', 'pointer-events-none');
+                toast.classList.add('opacity-100', 'translate-y-0');
+
+                setTimeout(() => {
+                    toast.classList.remove('opacity-100', 'translate-y-0');
+                    toast.classList.add('opacity-0', 'translate-y-4', 'pointer-events-none');
+                }, 3500);
+            }
+
+            // Redirect to WhatsApp after 1 second so the toast is readable
+            setTimeout(() => {
+                window.open(`https://api.whatsapp.com/send?phone=919866610373&text=${formattedMsg}`, '_blank');
+            }, 1000);
         });
 
         // 5. Social Sharing trigger
@@ -1143,6 +1146,12 @@
             runPetalShower();
         };
     </script>
+    <!-- RSVP Toast Badge -->
+    <div id="rsvpToast"
+        class="fixed bottom-10 left-1/2 -translate-x-1/2 z-[9999] bg-weddingRed/95 backdrop-blur-md border border-weddingGold text-weddingGold text-xs tracking-wider px-6 py-3 rounded-full shadow-2xl transition-all duration-500 opacity-0 translate-y-4 pointer-events-none select-none font-semibold flex items-center gap-2">
+        <i class="fa-solid fa-circle-check text-weddingGold text-sm animate-pulse"></i>
+        <span>RSVP Prepared! Opening WhatsApp...</span>
+    </div>
 </body>
 
 </html>
