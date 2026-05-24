@@ -1,0 +1,363 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Supraja & Rohith's Wedding Invitation</title>
+    <!-- Romantic Fonts & FontAwesome for cute icons -->
+    <link href="https://fonts.googleapis.com/css2?family=Alex+Brush&family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <style>
+        :root {
+            --primary-pink: #ffb7b2;
+            --rose-gold: #b5838d;
+            --soft-cream: #fffdf9;
+            --text-dark: #6d597a;
+            --marigold-yellow: #f9bec7;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: var(--soft-cream);
+            color: var(--text-dark);
+            text-align: center;
+        }
+
+        /* Hero Banner Section */
+        .hero {
+            background: linear-gradient(rgba(255, 253, 249, 0.85), rgba(255, 213, 212, 0.65)), 
+                        url('https://images.unsplash.com/photo-1519741497674-611481863552?q=80&w=2070') center/cover;
+            padding: 90px 20px;
+            border-bottom-left-radius: 50px;
+            border-bottom-right-radius: 50px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+        }
+
+        .hero h1 {
+            font-family: 'Alex Brush', cursive;
+            font-size: 3.8rem;
+            color: var(--rose-gold);
+            margin-bottom: 10px;
+            line-height: 1.2;
+        }
+
+        .hero p {
+            font-size: 1.1rem;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            font-weight: 600;
+        }
+
+        /* Cute Heart Divider */
+        .divider {
+            margin: 20px auto;
+            font-size: 1.5rem;
+            color: var(--primary-pink);
+        }
+
+        /* Countdown Box */
+        .countdown-container {
+            background: white;
+            max-width: 90%;
+            width: 420px;
+            margin: -40px auto 40px auto;
+            padding: 25px 20px;
+            border-radius: 20px;
+            box-shadow: 0 10px 25px rgba(181, 131, 141, 0.15);
+        }
+
+        .countdown-title {
+            font-size: 0.9rem;
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+            margin-bottom: 15px;
+            font-weight: 600;
+        }
+
+        .timer {
+            display: flex;
+            justify-content: space-around;
+        }
+
+        .time-box {
+            flex: 1;
+        }
+
+        .time-box span {
+            display: block;
+            font-size: 2rem;
+            font-weight: 600;
+            color: var(--rose-gold);
+        }
+
+        .time-box label {
+            font-size: 0.75rem;
+            color: #888;
+            text-transform: uppercase;
+        }
+
+        /* Events Timeline/Cards */
+        .section-title {
+            font-family: 'Alex Brush', cursive;
+            font-size: 3.2rem;
+            color: var(--rose-gold);
+            margin: 30px 0 20px 0;
+        }
+
+        .timeline {
+            padding: 0 20px 40px 20px;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .event-card {
+            background: white;
+            border-radius: 20px;
+            padding: 25px;
+            margin-bottom: 25px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.02);
+            border: 1px solid rgba(255, 183, 178, 0.3);
+            transition: transform 0.3s ease;
+        }
+
+        .event-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .event-icon {
+            font-size: 2.2rem;
+            color: var(--rose-gold);
+            margin-bottom: 10px;
+        }
+
+        .event-card h3 {
+            font-size: 1.4rem;
+            margin-bottom: 12px;
+            color: var(--rose-gold);
+        }
+
+        .event-details {
+            font-size: 0.95rem;
+            margin-bottom: 20px;
+            line-height: 1.7;
+            text-align: left;
+            max-width: 320px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .event-details p {
+            margin-bottom: 6px;
+            display: flex;
+            align-items: flex-start;
+            gap: 10px;
+        }
+
+        .event-details i {
+            color: var(--rose-gold);
+            margin-top: 4px;
+            width: 18px;
+        }
+
+        /* Maps Button */
+        .map-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            background-color: var(--rose-gold);
+            color: white;
+            padding: 12px 24px;
+            border-radius: 25px;
+            text-decoration: none;
+            font-size: 0.85rem;
+            font-weight: 600;
+            transition: background 0.3s;
+            box-shadow: 0 4px 10px rgba(181, 131, 141, 0.2);
+        }
+
+        .map-btn:hover {
+            background-color: var(--text-dark);
+        }
+
+        /* Footer Share Button */
+        .share-section {
+            padding: 50px 20px;
+            background-color: #ffe5e5;
+            border-top-left-radius: 40px;
+            border-top-right-radius: 40px;
+        }
+
+        .share-btn {
+            background: linear-gradient(135deg, var(--primary-pink), var(--rose-gold));
+            color: white;
+            border: none;
+            padding: 15px 35px;
+            font-size: 1rem;
+            font-weight: 600;
+            border-radius: 30px;
+            cursor: pointer;
+            box-shadow: 0 5px 15px rgba(185, 131, 141, 0.4);
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        /* Mobile Adjustments */
+        @media (max-width: 480px) {
+            .hero h1 { font-size: 3rem; }
+            .section-title { font-size: 2.6rem; }
+            .time-box span { font-size: 1.6rem; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Hero Banner -->
+    <div class="hero">
+        <h1>Supraja & Rohith</h1>
+        <p>Are Getting Married!</p>
+        <div class="divider"><i class="fa-solid fa-heart"></i></div>
+    </div>
+
+    <!-- Live Countdown -->
+    <div class="countdown-container">
+        <div class="countdown-title">Days until the Muhurtham</div>
+        <div class="timer">
+            <div class="time-box">
+                <span id="days">00</span>
+                <label>Days</label>
+            </div>
+            <div class="time-box">
+                <span id="hours">00</span>
+                <label>Hrs</label>
+            </div>
+            <div class="time-box">
+                <span id="minutes">00</span>
+                <label>Mins</label>
+            </div>
+            <div class="time-box">
+                <span id="seconds">00</span>
+                <label>Secs</label>
+            </div>
+        </div>
+    </div>
+
+    <!-- Celebrations Section -->
+    <h2 class="section-title">The Wedding Events</h2>
+    
+    <div class="timeline">
+        
+        <!-- Engagement Card -->
+        <div class="event-card">
+            <div class="event-icon"><i class="fa-solid fa-ring"></i></div>
+            <h3>The Engagement</h3>
+            <div class="event-details">
+                <p><i class="fa-regular fa-calendar"></i> Thursday, 02 July 2026</p>
+                <p><i class="fa-regular fa-clock"></i> 11:00 AM</p>
+                <p><i class="fa-solid fa-location-dot"></i> NCC Urban One, Osman Sagar Rd, Narsingi, Hyderabad</p>
+            </div>
+            <a href="https://maps.google.com/?cid=5534935847754850063" target="_blank" class="map-btn">
+                <i class="fa-solid fa-map-location-dot"></i> View on Google Maps
+            </a>
+        </div>
+
+        <!-- Haldi & Sangeet Card -->
+        <div class="event-card">
+            <div class="event-icon"><i class="fa-solid fa-wand-magic-sparkles"></i></div>
+            <h3>Haldi & Sangeet</h3>
+            <div class="event-details">
+                <p><i class="fa-regular fa-calendar"></i> Sunday, 16 August 2026</p>
+                <p><i class="fa-regular fa-clock"></i> Celebrations All Day</p>
+                <p><i class="fa-solid fa-location-dot"></i> Royal Exotica Farm House, Surangal Rd, Moinabad</p>
+            </div>
+            <a href="https://maps.google.com/?cid=12426258192851929551" target="_blank" class="map-btn">
+                <i class="fa-solid fa-map-location-dot"></i> View on Google Maps
+            </a>
+        </div>
+
+        <!-- Marriage Card -->
+        <div class="event-card">
+            <div class="event-icon"><i class="fa-solid fa-gopuram"></i></div>
+            <h3>The Wedding (Muhurtham)</h3>
+            <div class="event-details">
+                <p><i class="fa-regular fa-calendar"></i> Thursday, 27 August 2026</p>
+                <p><i class="fa-regular fa-clock"></i> 11:20 AM</p>
+                <p><i class="fa-solid fa-location-dot"></i> Parinaya Conventions, Brahmanapally Road, Turkayamjal, Hyderabad</p>
+            </div>
+            <a href="https://maps.google.com/?cid=1224196098378392077" target="_blank" class="map-btn">
+                <i class="fa-solid fa-map-location-dot"></i> View on Google Maps
+            </a>
+        </div>
+
+        <!-- Reception Card -->
+        <div class="event-card">
+            <div class="event-icon"><i class="fa-solid fa-champagne-glasses"></i></div>
+            <h3>The Reception</h3>
+            <div class="event-details">
+                <p><i class="fa-regular fa-calendar"></i> Saturday, 29 August 2026</p>
+                <p><i class="fa-regular fa-clock"></i> 06:00 PM Onwards</p>
+                <p><i class="fa-solid fa-location-dot"></i> Nandana Gardens, Krishna Colony, Mahabubabad</p>
+            </div>
+            <a href="https://maps.google.com/?cid=16530344812734595952" target="_blank" class="map-btn">
+                <i class="fa-solid fa-map-location-dot"></i> View on Google Maps
+            </a>
+        </div>
+
+    </div>
+
+    <!-- Share Section -->
+    <div class="share-section">
+        <h2 class="section-title" style="font-size: 2.5rem; margin-bottom: 10px;">Join Our Celebration!</h2>
+        <p style="margin-bottom: 20px; font-size: 0.95rem; padding: 0 10px;">Share this digital card with your loved ones.</p>
+        <button class="share-btn" onclick="shareWebsite()">
+            <i class="fa-brands fa-whatsapp"></i> Share via WhatsApp
+        </button>
+    </div>
+
+    <script>
+        // Set countdown target to Wedding Time (August 27, 2026 at 11:20 AM)
+        const weddingDate = new Date("Aug 27, 2026 11:20:00").getTime();
+
+        const timerInterval = setInterval(function() {
+            const now = new Date().getTime();
+            const distance = weddingDate - now;
+
+            const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+            const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+            const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+            const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+            document.getElementById("days").innerHTML = days < 10 ? "0" + days : days;
+            document.getElementById("hours").innerHTML = hours < 10 ? "0" + hours : hours;
+            document.getElementById("minutes").innerHTML = minutes < 10 ? "0" + minutes : minutes;
+            document.getElementById("seconds").innerHTML = seconds < 10 ? "0" + seconds : seconds;
+
+            if (distance < 0) {
+                clearInterval(timerInterval);
+                document.querySelector(".countdown-title").innerHTML = "Just Married! 🎉";
+                document.querySelector(".timer").style.display = "none";
+            }
+        }, 1000);
+
+        // Native Mobile Share
+        function shareWebsite() {
+            if (navigator.share) {
+                navigator.share({
+                    title: "Supraja & Rohith's Wedding Invitation",
+                    text: "We are getting married! Check out our events, venues, and countdown clock here:",
+                    url: window.location.href
+                }).catch(console.error);
+            } else {
+                window.open(`https://api.whatsapp.com/send?text=We are getting married! Check out our events, venues, and countdown clock here: ${encodeURIComponent(window.location.href)}`, '_blank');
+            }
+        }
+    </script>
+</body>
+</html>
